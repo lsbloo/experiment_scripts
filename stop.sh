@@ -8,7 +8,7 @@ CheckParams() {
 }
 
 CheckFile() {
-   if [ -f "$1" ] then;
+   if [ -f "$1" ]; then
         echo "File $1 found."
     else
         echo "File $1 not found."
@@ -45,30 +45,28 @@ CheckTechnology() {
     fi
 }
 
-StartServer() {
+RunTests() {
+    cd ${1}_tasks
     PID=0
 
     if [ $1 == "ror" ]; then
-        rails server &
+        rails server >/dev/null 2>&1 &
         PID=$!
+        sleep 5
     else
         ng serve --port 3000 &
         PID=$!
     fi
 
-    return PID
-}
-
-RunTests() {
     SELENIUM_BROWSER=chrome node $3
     TEST_RESULT=$?
 
-    kill -9 $2
+    kill -9 $PID  > /dev/null 2>&1
 
     if [ $TEST_RESULT -eq 0 ]; then
-        echo "Tests passed for Task $1"
+        echo "Tests passed for Task $2"
     else
-        echo "Tests failed for Task $1. Please fix them and try again."
+        echo "Tests failed for Task $2. Please fix them and try again."
         exit 1
     fi
 }
@@ -101,7 +99,7 @@ SendFilesToGithub() {
 CleanUp() {
     cd
     rm -rf ~/${1}_tasks
-    rm github.account.data technology.data task.data
+    rm technology.data task.data
 }
 
 CheckParams
@@ -113,9 +111,7 @@ TECHNOLOGY=`sh technology.data`
 CheckTechnology $TECHNOLOGY
 CheckFile github.account.data
 GITHUB_ACCOUNT=`sh github.account.data`
-StartServer $TECHNOLOGY
-SERVER_PID=$?
-RunTests $TASK $SERVER_PID task-e2e.js
+RunTests $TECHNOLOGY $TASK test/task-e2e.js
 SaveEnd
 SendFilesToGithub $TASK
 CleanUp $TECHNOLOGY
