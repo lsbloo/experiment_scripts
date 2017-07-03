@@ -74,6 +74,12 @@ HardResetToTag() {
     fi
 }
 
+UpdateDeps() {
+    if [ $1 -eq "mg" ]; then
+        yarn install
+    fi    
+}
+
 NewBranch() {
     git checkout -b $1
 }
@@ -87,7 +93,8 @@ CheckParams $# $1 $2
 CheckFile github.account.data
 StoreData $1 task.data
 StoreData $2 technology.data
-CloneRepository $2_tasks
+CloneRepository ${2}tasks
 HardResetToTag T$1
+UpdateDeps $2
 NewBranch A$1
 SaveBegin
