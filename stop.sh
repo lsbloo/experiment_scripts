@@ -98,7 +98,7 @@ SendFilesToGithub() {
 
 CleanUp() {
     cd
-    rm -rf ~/${1}_tasks
+    rm -rf ~/${1}tasks
     rm technology.data task.data
 }
 
