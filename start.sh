@@ -75,7 +75,7 @@ HardResetToTag() {
 }
 
 UpdateDeps() {
-    if [ $1 -eq "mg" ]; then
+    if [ $1 = "mg" ]; then
         yarn install
     else
         bundle install
