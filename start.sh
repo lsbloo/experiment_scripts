@@ -79,6 +79,7 @@ UpdateDeps() {
         yarn install
     else
         bundle install
+        bin/rake db:migrate RAILS_ENV=development
     fi    
 }
 
