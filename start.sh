@@ -2,7 +2,7 @@
 
 CheckTaskRange() {
     if [[ $1 = *[[:digit:]]* ]]; then
-        if [[ $1 < 1 || $1 > 14 ]]; then
+        if [[ $1 < 0 || $1 > 14 ]]; then
             echo "TASK is $1 but should be between 1 and 14"
             exit 1
         fi
