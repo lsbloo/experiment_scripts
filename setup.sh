@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 3 ]; then
-    echo 'Usage: sh setup.sh github_account your@email.com "Your Name"'
+    echo 'Usage: setup.sh github_account your@email.com "Your Name"'
     exit 1
 fi
 
