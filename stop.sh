@@ -52,10 +52,11 @@ RunTests() {
     if [ $1 == "ror" ]; then
         rails server >/dev/null 2>&1 &
         PID=$!
-        sleep 5
+        sleep 10
     else
         ng serve --port 3000 &
         PID=$!
+        sleep 10
     fi
 
     SELENIUM_BROWSER=chrome node $3
