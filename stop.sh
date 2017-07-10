@@ -27,8 +27,8 @@ CheckTask() {
     CheckContent $1
 
     if [[ $1 = *[[:digit:]]* ]]; then
-        if [[ $1 < 1 || $1 > 14 ]]; then
-            echo "TASK is $1 but should be between 1 and 14"
+        if [[ $1 < 0 || $1 > 12 ]]; then
+            echo "TASK is $1 but should be between 0 and 12"
             exit 1
         fi
     else
