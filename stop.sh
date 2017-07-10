@@ -46,7 +46,7 @@ CheckTechnology() {
 }
 
 RunTests() {
-    cd ${1}_tasks
+    cd ${1}tasks
     PID=0
 
     if [ $1 == "ror" ]; then
